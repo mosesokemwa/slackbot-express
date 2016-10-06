@@ -1,0 +1,32 @@
+{
+  "name": "slack-express",
+  "version": "1.0.0",
+  "description": "A customer care slack bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mussaimo/slackbot-express.git"
+  },
+  "keywords": [
+    "slackbot",
+    "bot",
+    "bot",
+    "user",
+    "customer",
+    "care",
+    "bot",
+    "slack"
+  ],
+  "author": "Okemwa Moses",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mussaimo/slackbot-express/issues"
+  },
+  "homepage": "https://github.com/mussaimo/slackbot-express#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
