@@ -55,8 +55,7 @@ slack.on('message', function (data) {
     // If no text, return.
     if (typeof data.text === 'undefined') return;
     // If someone says `cake!!` respond to their message with 'user OOH, CAKE!! :cake:'
-    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' OOH, CAKE!! :cake:'
-      + slack.getUser(data.text).name);
+    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' OOH, CAKE!! :cake:');
 
     // If the first character starts with %, you can change this to your own prefix of course.
     if (data.text.charAt(0) === '%') {
