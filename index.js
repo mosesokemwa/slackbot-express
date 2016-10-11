@@ -1,4 +1,4 @@
-// var hellobot = require('./hellobot');
+var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -25,15 +25,16 @@ app.post('/hello', hellobot);
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////
-//      ███████╗██╗      █████╗  ██████╗██╗  ██╗    ██████╗     ██████╗  ████████╗  //
-//      ██╔════╝██║     ██╔══██╗██╔════╝██║ ██╔╝    ██║  ██╗   ██║   ██║    ██╔══╝  //
-//      ███████╗██║     ███████║██║     █████╔╝     ██████═╝   ██║   ██║    ██║     //
-//      ╚════██║██║     ██╔══██║██║     ██╔═██╗     ██║  ██╗   ██║   ██║    ██║     //
-//      ███████║███████╗██║  ██║╚██████╗██║  ██╗    ██████═╝    ██████╔╝    ██║     //
-//      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝     ╚═════╝     ╚═╝     //
-//          14-12-14 | xBytez | me@xbytez.eu                                        //
-//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//      ███████╗██╗      █████╗  ██████╗██╗  ██╗    ██████╗     ██████╗  ████████╗      //
+//      ██╔════╝██║     ██╔══██╗██╔════╝██║ ██╔╝    ██║  ██╗   ██║   ██║    ██╔══╝      //
+//      ███████╗██║     ███████║██║     █████╔╝     ██████═╝   ██║   ██║    ██║         //
+//      ╚════██║██║     ██╔══██║██║     ██╔═██╗     ██║  ██╗   ██║   ██║    ██║         //
+//      ███████║███████╗██║  ██║╚██████╗██║  ██╗    ██████═╝    ██████╔╝    ██║         //
+//      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝     ╚═════╝     ╚═╝         //
+//                   11-10-16 | mussaimo | okemwamoses@gmail.com                        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 // Requiring our module
 var slackAPI = require('slackbotapi');
@@ -45,12 +46,16 @@ var slack = new slackAPI({
     'autoReconnect': true
 });
 
-// Slack on EVENT message, send data.
+// https://slack.com/api/chat.postMessage?token=xoxb-89845683031-7xwrpgaTzy7PdyNBF5YHKwT8&channel=help-desk&text=joker
+
+// Slack on EVENT message, send data
 slack.on('message', function (data) {
     // If no text, return.
     if (typeof data.text === 'undefined') return;
     // If someone says `cake!!` respond to their message with 'user OOH, CAKE!! :cake:'
-    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' OOH, CAKE!! :cake:' + data.text);
+    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' this is coooooooooooooooooooool');
+
+    console.log(data.text);
 
     // If the first character starts with %, you can change this to your own prefix of course.
     if (data.text.charAt(0) === '%') {
@@ -79,27 +84,3 @@ slack.on('message', function (data) {
         }
     }
 });
-
-//slack.on('team_join', function (data) {
-    // Greet a new member that joins
-    // slack.sendPM(data.user.id, 'Hellow and welcome to the team! :simple_smile: :beers:');
-//});
-
-
-
-  var text = data.text;
-
-
-module.exports = function (req, res, next) {
-  var userName = req.body.user_name;
-  var botPayload = {
-    text : 'Hello ' + userName + '!' + 'this is your message: ' + text
-  };
-
-  // avoid infinite loop caused by slackbot keyword
-  if (userName !== 'slackbot') {
-    return res.status(200).json(botPayload);
-  } else {
-    return res.status(200).end();
-  }
-}
