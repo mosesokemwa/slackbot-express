@@ -11,4 +11,4 @@
         $ npm install
 
         # run the main file
-        $ node index.js
+        $ node app
