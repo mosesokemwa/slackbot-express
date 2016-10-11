@@ -1,9 +1,4 @@
-
-
-
-
-
-var hellobot = require('./hellobot');
+// var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -55,7 +50,7 @@ slack.on('message', function (data) {
     // If no text, return.
     if (typeof data.text === 'undefined') return;
     // If someone says `cake!!` respond to their message with 'user OOH, CAKE!! :cake:'
-    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' OOH, CAKE!! :cake:');
+    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' OOH, CAKE!! :cake:' + data.text);
 
     // If the first character starts with %, you can change this to your own prefix of course.
     if (data.text.charAt(0) === '%') {
@@ -89,3 +84,22 @@ slack.on('message', function (data) {
     // Greet a new member that joins
     // slack.sendPM(data.user.id, 'Hellow and welcome to the team! :simple_smile: :beers:');
 //});
+
+
+
+
+
+module.exports = function (req, res, next) {
+  var userName = req.body.user_name;
+  var text = data.text;
+  var botPayload = {
+    text : 'Hello ' + userName + '!' + 'this is your message: ' + text
+  };
+
+  // avoid infinite loop caused by slackbot keyword
+  if (userName !== 'slackbot') {
+    return res.status(200).json(botPayload);
+  } else {
+    return res.status(200).end();
+  }
+}
