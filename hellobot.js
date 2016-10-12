@@ -1,8 +1,13 @@
 module.exports = function (req, res, next) {
   var userName = req.body.user_name;
-  var text = data.text;
+  var userText =  req.body.data.text;
   var botPayload = {
-    text : 'Hello ' + userName + '!' + 'this is your message: ' + text
+    text : 'Hi ' + userName + '!' + 'How may I be of assistance today?'
+  };
+
+  // meant to be posted in channel help-desk
+  var botPayload = {
+    text : userName + ' requires help with \n' + userText
   };
 
   // avoid infinite loop caused by slackbot keyword
