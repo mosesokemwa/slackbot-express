@@ -5,15 +5,54 @@ module.exports = function (req, res, next) {
     text : 'Hi ' + userName + '!' + 'How may I be of assistance today?' + userText
   };
 
-  // avoid infinite loop caused by slackbot keyword
+   // channel pay load
+  var channelPayload = {
+    channel: help-desk,
+    text: '@' + userName + ' ' + '*posted*:' + userText
+  };
+
+
+  /* 
+    avoid infinite loop caused by slackbot keyword
+    post message to channel(help desk) if length is greater than 10
+  */
+
+  
   if (userName !== 'slackbot') {
     return res.status(200).json(botPayload);
+  } else if (userName !== 'slackbot' && req.body.text.length >= 10) {
+    return res.status(200).json(channelPayload);
   } else {
     return res.status(200).end();
   }
-
 }
 
+
+// var IncomingWebhook = require('@slack/client').IncomingWebhook;
+
+// var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
+// var wh = new IncomingWebhook(url);
+// var whWithDefaults = new IncomingWebhook(url, {
+//   username: 'houdinni',
+//   iconEmoji: ':slack:',
+//   channel: ''
+// });
+
+// wh.send('CTO Okemwa Moses');
+
+// whWithDefaults.send({
+//   text: 'Some text',
+//   iconEmoji: ':robot_face:',
+//   channel: 'custom-channel',
+//   attachments: [
+//     // attachment data
+//     // see https://api.slack.com/docs/attachments
+//   ]
+// });
+
+// wh.send('Some text', function onSendEnd() {
+//   console.log('Finished sending');
+// });
 
 
 //Import request module

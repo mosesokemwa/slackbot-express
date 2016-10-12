@@ -2,6 +2,7 @@ module.exports = function (req, res, next) {
   var userName = req.body.user_name;
   var userText =  req.body.data.text;
   var botPayload = {
+    channel: help-desk,
     text : userName + ' ' + userText
   };
 
