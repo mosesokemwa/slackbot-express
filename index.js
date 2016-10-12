@@ -1,4 +1,5 @@
 var hellobot = require('./hellobot');
+var bot = require('./bot');
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -6,10 +7,14 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 // body parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true 
+}));
 
 // test route
-app.get('/', function (req, res) { res.status(200).send('Hello world!') });
+app.get('/', function (req, res) {
+    res.status(200).send('Hello world!')
+});
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -22,6 +27,27 @@ app.listen(port, function () {
 });
 
 app.post('/hello', hellobot);
+
+
+
+app.get('/hello', function(req,res) {
+
+        var userText = 'ms';
+
+        if(userText === 'ms' || 'MS') {
+
+            res.end('yup');
+
+        } else {
+
+            res.end('nope');
+
+        }
+
+});
+
+app.post('/bot', bot);
+
 
 
 
@@ -46,19 +72,30 @@ var slack = new slackAPI({
     'autoReconnect': true
 });
 
-// https://slack.com/api/chat.postMessage?token=xoxb-89845683031-7xwrpgaTzy7PdyNBF5YHKwT8&channel=help-desk&text=joker
-
 // Slack on EVENT message, send data
 slack.on('message', function (data) {
     // If no text, return.
     if (typeof data.text === 'undefined') return;
-    // If someone says `cake!!` respond to their message with 'user OOH, CAKE!! :cake:'
-    if (data.text === 'help!') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' this is coooooooooooooooooooool');
+    // If someone says `help` respond to their message with 'user OOH, CAKE!! :cake:'
+    if (data.text === 'help') slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' how may I help you!');
 
-    console.log(data.text);
+
+
+    // If someone says `help` respond to their message with 'user OOH, CAKE!! :cake:'
+    if (data.text.split('') === 'i') slack.sendMsg(data.channel, 'Have you tried this?\n wdnvsndjnfj \n jdfnjidnfjin \n owhufhuiwhdgufh');
+
+
+
+    
+
+
+
+
+
+
 
     // If the first character starts with %, you can change this to your own prefix of course.
-    if (data.text.charAt(0) === '%') {
+    if (data.text === 'say') {
         // Split the command and it's arguments into an array
         var command = data.text.substring(1).split(' ');
 
@@ -78,9 +115,13 @@ slack.on('message', function (data) {
                 break;
 
             case 'say':
-                var say = data.text.split('%say ');
+                var say = data.text.split('say ');
                 slack.sendMsg(data.channel, say[1]);
                 break;
         }
     }
+});
+
+slack.on('message', function (data) {
+    
 });
