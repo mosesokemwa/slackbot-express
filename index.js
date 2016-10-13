@@ -1,5 +1,15 @@
-var hellobot = require('./hellobot');
-var bot = require('./bot');
+//////////////////////////////////////////////////////////////////////////////////////////
+//      ███████╗██╗      █████╗  ██████╗██╗  ██╗    ██████╗     ██████╗  ████████╗      //
+//      ██╔════╝██║     ██╔══██╗██╔════╝██║ ██╔╝    ██║  ██╗   ██║   ██║    ██╔══╝      //
+//      ███████╗██║     ███████║██║     █████╔╝     ██████═╝   ██║   ██║    ██║         //
+//      ╚════██║██║     ██╔══██║██║     ██╔═██╗     ██║  ██╗   ██║   ██║    ██║         //
+//      ███████║███████╗██║  ██║╚██████╗██║  ██╗    ██████═╝    ██████╔╝    ██║         //
+//      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝     ╚═════╝     ╚═╝         //
+//                   11-10-16 | mussaimo | okemwamoses@gmail.com                        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -25,24 +35,6 @@ app.use(function (err, req, res, next) {
 app.listen(port, function () {
   console.log('Slack bot listening on port ' + port);
 });
-
-app.post('/hello', hellobot);
-
-// app.post('/bot', bot);
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//      ███████╗██╗      █████╗  ██████╗██╗  ██╗    ██████╗     ██████╗  ████████╗      //
-//      ██╔════╝██║     ██╔══██╗██╔════╝██║ ██╔╝    ██║  ██╗   ██║   ██║    ██╔══╝      //
-//      ███████╗██║     ███████║██║     █████╔╝     ██████═╝   ██║   ██║    ██║         //
-//      ╚════██║██║     ██╔══██║██║     ██╔═██╗     ██║  ██╗   ██║   ██║    ██║         //
-//      ███████║███████╗██║  ██║╚██████╗██║  ██╗    ██████═╝    ██████╔╝    ██║         //
-//      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝     ╚═════╝     ╚═╝         //
-//                   11-10-16 | mussaimo | okemwamoses@gmail.com                        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
 
 // Requiring our module
 var slackAPI = require('slackbotapi');
@@ -72,13 +64,6 @@ slack.on('message', function (data) {
 
         slack.sendMsg(data.channel, queryIssue);
 
-        // var userHelp = data.text;
-        // var arr = userHelp.split(' ');
-        // var custom = 'how do you host on heroku?';   
-        // var arrCustom = custom.split(',');
-        // var helpDesk = 'help-desk';
-
-
         console.log('before help coming ' + data.channel + ' ' + userHelp);
 
         if (data.text.length >= 10 && data.text !== queryIssue){
@@ -91,8 +76,6 @@ slack.on('message', function (data) {
             var userHelp = data.text;
 
             console.log(userName);
-
-
 
             var IncomingWebhook = require('@slack/client').IncomingWebhook;
             var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
