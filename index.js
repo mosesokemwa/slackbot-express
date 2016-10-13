@@ -57,20 +57,20 @@ var slack = new slackAPI({
 // Slack on EVENT message, send data
 slack.on('message', function (data) {
 
-    // functions global scope
-    var userName = data.user;   
-
+    // local scopes
+    var userName = slack.getUser(data.user).name;
+    var queryIssue = 'What is your query my friend';
 
     // If no text, return.
     if (typeof data.text === 'undefined') return;
     // If someone says `help` respond to their message with 'user OOH, CAKE!! :cake:'
     if (data.text === 'help!' && data.user !== 'slackbot') {
         
-        slack.sendMsg(data.channel, '@' + slack.getUser(data.user).name + ' how may I help you! & \n have you tried this? \n wdnvsndjnfj \n jdfnjidnfjin \n owhufhuiwhdgufh');
+        slack.sendMsg(data.channel, '@' + userName + ' how may I help you! & \n have you tried this? \n wdnvsndjnfj \n jdfnjidnfjin \n owhufhuiwhdgufh');
 
-    } else if (data.text === 'yes' || 'Yes' && data.text !== 'help' && data.user !== 'incoming-webhook' && data.user !== 'houdinni') {
+    } else if (data.text === 'yes' || 'Yes' && data.text !== 'help' && data.user !== 'houdinni') {
 
-        slack.sendMsg(data.channel, 'What is your query my friend');
+        slack.sendMsg(data.channel, queryIssue);
 
         // var userHelp = data.text;
         // var arr = userHelp.split(' ');
@@ -81,7 +81,7 @@ slack.on('message', function (data) {
 
         console.log('before help coming ' + data.channel + ' ' + userHelp);
 
-        if (data.text.length >= 10){
+        if (data.text.length >= 10 && data.text !== queryIssue){
 
             slack.sendMsg(data.channel, 'help is coming soon');
             console.log('after help coming ' + data.channel + ' ' + userHelp);
@@ -98,8 +98,10 @@ slack.on('message', function (data) {
             var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
             var wh = new IncomingWebhook(url);
             
-            wh.send('@' + userName + ' asked ' + userHelp);
-        } 
+            wh.send('@' + userName + ' asked \n \n' + userHelp);
+        } else if (data.text === queryIssue) {
+            return;
+        }
     } else{
 
     }
