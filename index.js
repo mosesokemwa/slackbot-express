@@ -87,7 +87,7 @@ slack.on('message', function (data) {
             console.log('after help coming ' + data.channel + ' ' + userHelp);
 
 
-            var helpDesk = 'stat';
+            var helpDesk = 'help-desk';
             var userHelp = data.text;
 
             console.log(userName);
