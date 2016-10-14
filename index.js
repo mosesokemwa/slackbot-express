@@ -89,3 +89,10 @@ slack.on('message', function (data) {
 
     }
 });
+
+
+// Prevents heroku this app from sleeping by pinging it every five minutes
+var http = require("http");
+setInterval(function() {
+    http.get("https://infinite-wave-45451.herokuapp.com/");
+}, 300000); // every 5 minutes (300000)
