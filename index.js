@@ -91,8 +91,29 @@ slack.on('message', function (data) {
 });
 
 
-// Prevents heroku this app from sleeping by pinging it every five minutes
+// Prevents heroku current app from sleeping by pinging it every five minutes
 var http = require("http");
-setInterval(function() {
-    http.get("https://infinite-wave-45451.herokuapp.com/");
-}, 300000); // every 5 minutes (300000)
+
+function startKeepAlive() {
+    setInterval(function() {
+        var options = {
+            host: 'https://infinite-wave-45451.herokuapp.com',
+            port: 80,
+            path: '/'
+        };
+        http.get(options, function(res) {
+            res.on('data', function(chunk) {
+                try {
+                    // optional logging... disable after it's working
+                    console.log("HEROKU RESPONSE: " + chunk);
+                } catch (err) {
+                    console.log(err.message);
+                }
+            });
+        }).on('error', function(err) {
+            console.log("Error: " + err.message);
+        });
+    }, 20 * 60 * 1000); // load every 20 minutes
+}
+
+startKeepAlive();
