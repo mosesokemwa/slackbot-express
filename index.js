@@ -41,7 +41,8 @@ var slackAPI = require('slackbotapi');
 
 // Starting
 var slack = new slackAPI({
-    'token': 'xoxb-89845683031-7xwrpgaTzy7PdyNBF5YHKwT8',
+    // 'token': 'xoxb-89845683031-7xwrpgaTzy7PdyNBF5YHKwT8',
+    'token': 'xoxb-89845683031-DPLzeY0AtGeyVsyRWynmc1dL',
     'logging': true,
     'autoReconnect': true
 });
@@ -78,7 +79,7 @@ slack.on('message', function (data) {
             console.log(userName);
 
             var IncomingWebhook = require('@slack/client').IncomingWebhook;
-            var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
+            var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
             var wh = new IncomingWebhook(url);
             
             wh.send('@' + userName + ' asked \n \n' + userHelp);
