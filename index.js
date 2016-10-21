@@ -70,7 +70,7 @@ slack.on('message', function (data) {
         if (data.text.length >= 10 && data.text !== queryIssue){
 
             slack.sendMsg(data.channel, 'help is coming soon');
-            console.log('after help coming ' + data.channel + ' ' + userHelp);
+            // console.log('after help coming ' + data.channel + ' ' + userHelp);
 
 
             var helpDesk = 'help-desk';
@@ -79,7 +79,7 @@ slack.on('message', function (data) {
             console.log(userName);
 
             var IncomingWebhook = require('@slack/client').IncomingWebhook;
-            var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
+            var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
             var wh = new IncomingWebhook(url);
             
             wh.send('@' + userName + ' asked \n \n' + userHelp);
@@ -121,13 +121,14 @@ slack.on('message', function (data) {
 
 
 // Prevents current app from sleeping by pinging it every 55 mins
-var minutes = 50, the_interval = minutes * 60 * 1000;
+var minutes = 55, the_interval = minutes * 60 * 1000;
 
 setInterval(function() {
     var options = {
         host: 'https://infinite-wave-45451.herokuapp.com'
     };
+    
     http.get(options, function (http_res) {
-        console.log("Sent http request to myapp.herokuapp.com to stay awake.");
+        console.log("Sent http request to https://infinite-wave-45451.herokuapp.com to stay awake.");
     });
 }, the_interval);
