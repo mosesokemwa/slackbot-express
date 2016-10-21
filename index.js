@@ -92,29 +92,42 @@ slack.on('message', function (data) {
 });
 
 
-// Prevents heroku current app from sleeping by pinging it every five minutes
-var http = require("http");
+// Prevents current app from sleeping by pinging it every 55 mins
+// var http = require("http");
 
-function startKeepAlive() {
-    setInterval(function() {
-        var options = {
-            host: 'https://infinite-wave-45451.herokuapp.com',
-            port: 80,
-            path: '/'
-        };
-        http.get(options, function(res) {
-            res.on('data', function(chunk) {
-                try {
-                    // optional logging... disable after it's working
-                    console.log("HEROKU RESPONSE: " + chunk);
-                } catch (err) {
-                    console.log(err.message);
-                }
-            });
-        }).on('error', function(err) {
-            console.log("Error: " + err.message);
-        });
-    }, 20 * 60 * 1000); // load every 20 minutes
-}
+// function startKeepAlive() {
+//     setInterval(function() {
+//         var options = {
+//             host: 'https://infinite-wave-45451.herokuapp.com',
+//             port: 80,
+//             path: '/'
+//         };
+//         http.get(options, function(res) {
+//             res.on('data', function(chunk) {
+//                 try {
+//                     // optional logging... disable after it's working
+//                     console.log("HEROKU RESPONSE: " + chunk);
+//                 } catch (err) {
+//                     console.log(err.message);
+//                 }
+//             });
+//         }).on('error', function(err) {
+//             console.log("Error: " + err.message);
+//         });
+//     }, 3000000); // load every 50 minutes
+// }
 
-startKeepAlive();
+// startKeepAlive();
+
+
+// Prevents current app from sleeping by pinging it every 55 mins
+var minutes = 50, the_interval = minutes * 60 * 1000;
+
+setInterval(function() {
+    var options = {
+        host: 'https://infinite-wave-45451.herokuapp.com'
+    };
+    http.get(options, function (http_res) {
+        console.log("Sent http request to myapp.herokuapp.com to stay awake.");
+    });
+}, the_interval);
