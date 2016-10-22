@@ -58,8 +58,12 @@ slack.on('message', function (data) {
     if (typeof data.text === 'undefined') return;
     // If someone says `help` respond to their message with 'user OOH, CAKE!! :cake:'
     if (data.text === 'help!' && data.user !== 'slackbot') {
-        
-        slack.sendMsg(data.channel, '@' + userName + ' how may I help you! & \n have you tried this? \n wdnvsndjnfj \n jdfnjidnfjin \n owhufhuiwhdgufh');
+
+        slack.sendMsg(data.channel, '@' + userName + " how may I help you!\n \n" +
+	"Have you attempted the question for more than fifteen minutes? \n" +
+	"Did you cross check your question against the official programming language documentation? \n" +
+	"Did you seek help from your classmates? \n" +
+	"Have you compared your question against similar questions on stack overflow?");
 
     } else if (data.text === 'yes' || 'Yes' && data.text !== 'help' && data.user !== 'houdinni') {
 
@@ -81,7 +85,7 @@ slack.on('message', function (data) {
             var IncomingWebhook = require('@slack/client').IncomingWebhook;
             var url = process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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';
             var wh = new IncomingWebhook(url);
-            
+
             wh.send('@' + userName + ' asked \n \n' + userHelp);
         } else if (data.text === queryIssue) {
             return;
@@ -127,7 +131,7 @@ setInterval(function() {
     var options = {
         host: 'https://infinite-wave-45451.herokuapp.com'
     };
-    
+
     http.get(options, function (http_res) {
         console.log("Sent http request to https://infinite-wave-45451.herokuapp.com to stay awake.");
     });
