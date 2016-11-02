@@ -1,15 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//      ███████╗██╗      █████╗  ██████╗██╗  ██╗    ██████╗     ██████╗  ████████╗      //
-//      ██╔════╝██║     ██╔══██╗██╔════╝██║ ██╔╝    ██║  ██╗   ██║   ██║    ██╔══╝      //
-//      ███████╗██║     ███████║██║     █████╔╝     ██████═╝   ██║   ██║    ██║         //
-//      ╚════██║██║     ██╔══██║██║     ██╔═██╗     ██║  ██╗   ██║   ██║    ██║         //
-//      ███████║███████╗██║  ██║╚██████╗██║  ██╗    ██████═╝    ██████╔╝    ██║         //
-//      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝     ╚═════╝     ╚═╝         //
-//                   11-10-16 | mussaimo | okemwamoses@gmail.com                        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -18,30 +6,29 @@ var port = process.env.PORT || 3000;
 
 // body parser middleware
 app.use(bodyParser.urlencoded({
-    extended: true 
+    extended: true
 }));
 
 // test route
 app.get('/', function (req, res) {
-    res.status(200).send('Hello world!')
-});
+    res.status(200).send('Hello world!');
+    });
 
 // error handler
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(400).send(err.message);
-});
+  });
 
 app.listen(port, function () {
   console.log('Slack bot listening on port ' + port);
-});
+  });
 
 // Requiring our module
 var slackAPI = require('slackbotapi');
 
 // Starting
 var slack = new slackAPI({
-    // 'token': 'xoxb-89845683031-7xwrpgaTzy7PdyNBF5YHKwT8',
     'token': 'xoxb-89845683031-DPLzeY0AtGeyVsyRWynmc1dL',
     'logging': true,
     'autoReconnect': true
@@ -56,26 +43,21 @@ slack.on('message', function (data) {
 
     // If no text, return.
     if (typeof data.text === 'undefined') return;
+
     // If someone says `help` respond to their message with 'user OOH, CAKE!! :cake:'
     if (data.text === 'help!' && data.user !== 'slackbot') {
 
         slack.sendMsg(data.channel, '@' + userName + " how may I help you!\n \n" +
-	"Have you attempted the question for more than fifteen minutes? \n" +
-	"Did you cross check your question against the official programming language documentation? \n" +
-	"Did you seek help from your classmates? \n" +
-	"Have you compared your question against similar questions on stack overflow?");
-
-    } else if (data.text === 'yes' || 'Yes' && data.text !== 'help' && data.user !== 'houdinni') {
+        "Have you attempted the question for more than fifteen minutes? \n" +
+        "Did you cross check your question against the official programming language documentation? \n" +
+        "Did you seek help from your classmates? \n" +
+        "Have you compared your question against similar questions on stack overflow?");
+      } else if (data.text === 'yes' || 'Yes' && data.text !== 'help' && data.user !== 'houdinni') {
 
         slack.sendMsg(data.channel, queryIssue);
-
         console.log('before help coming ' + data.channel + ' ' + userHelp);
-
         if (data.text.length >= 10 && data.text !== queryIssue){
-
             slack.sendMsg(data.channel, 'help is coming soon');
-            // console.log('after help coming ' + data.channel + ' ' + userHelp);
-
 
             var helpDesk = 'help-desk';
             var userHelp = data.text;
@@ -91,48 +73,6 @@ slack.on('message', function (data) {
             return;
         }
     } else{
-
+      
     }
 });
-
-
-// Prevents current app from sleeping by pinging it every 55 mins
-// var http = require("http");
-
-// function startKeepAlive() {
-//     setInterval(function() {
-//         var options = {
-//             host: 'https://infinite-wave-45451.herokuapp.com',
-//             port: 80,
-//             path: '/'
-//         };
-//         http.get(options, function(res) {
-//             res.on('data', function(chunk) {
-//                 try {
-//                     // optional logging... disable after it's working
-//                     console.log("HEROKU RESPONSE: " + chunk);
-//                 } catch (err) {
-//                     console.log(err.message);
-//                 }
-//             });
-//         }).on('error', function(err) {
-//             console.log("Error: " + err.message);
-//         });
-//     }, 3000000); // load every 50 minutes
-// }
-
-// startKeepAlive();
-
-
-// Prevents current app from sleeping by pinging it every 55 mins
-var minutes = 55, the_interval = minutes * 60 * 1000;
-
-setInterval(function() {
-    var options = {
-        host: 'https://infinite-wave-45451.herokuapp.com'
-    };
-
-    http.get(options, function (http_res) {
-        console.log("Sent http request to https://infinite-wave-45451.herokuapp.com to stay awake.");
-    });
-}, the_interval);
