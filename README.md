@@ -22,7 +22,7 @@ If the answer is `yes`, the bot will prompt the student to post their query whic
 If the answer is `no` the conversation will stop awaiting for the student compliace with the check list questions.
 
 
-It is hosted on [Heroku](https://www.heroku.com/) and utilizes the Slack [Bot User](https://api.slack.com/bot-users) and [Incoming Webhook](https://api.slack.com/incoming-webhooks) API.
+It is hosted on [Heroku](https://www.heroku.com/) and utilizes the Slack [Bot User](https://api.slack.com/bot-users) and [Incoming Webhook](https://api.slack.com/incoming-webhooks) API's.
 
 
 
