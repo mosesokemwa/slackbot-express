@@ -1,37 +1,34 @@
 {
-  "name": "slack-express",
-  "version": "1.0.0",
-  "description": "A customer care slack bot",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=dev && node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mussaimo/slackbot-express.git"
-  },
-  "keywords": [
-    "slackbot",
-    "bot",
-    "bot",
-    "user",
-    "customer",
-    "care",
-    "bot",
-    "slack"
-  ],
-  "author": "Okemwa Moses",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mussaimo/slackbot-express/issues"
-  },
-  "homepage": "https://github.com/mussaimo/slackbot-express#readme",
-  "dependencies": {
-    "@slack/client": "^3.6.0",
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "request": "^2.75.0",
-    "slackbotapi": "^1.3.9"
-  }
+    "name": "slack-express",
+    "version": "1.0.0",
+    "description": "A customer care slack bot",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "set NODE_ENV=dev && node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mussaimo/slackbot-express.git"
+    },
+    "keywords": [
+        "slackbot",
+        "bot",
+        "user",
+        "customer care",
+        "slack"
+    ],
+    "author": "Okemwa Moses",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mussaimo/slackbot-express/issues"
+    },
+    "homepage": "https://github.com/mussaimo/slackbot-express#readme",
+    "dependencies": {
+        "@slack/client": "^3.6.0",
+        "body-parser": "^1.15.2",
+        "express": "^4.14.0",
+        "request": "^2.75.0",
+        "slackbotapi": "^1.3.9"
+    }
 }

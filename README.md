@@ -21,26 +21,31 @@ If the answer is `yes`, the bot will prompt the student to post their query whic
 
 If the answer is `no` the conversation will stop awaiting for the student compliace with the check list questions.
 
-
 It is hosted on [Heroku](https://www.heroku.com/) and utilizes the Slack [Bot User](https://api.slack.com/bot-users) and [Incoming Webhook](https://api.slack.com/incoming-webhooks) API's.
 
 
-
-node v4.5.0
-npm v2.15.9
-
-
 ### Running the slack-bot
+This the following are required in your development environment
 
-    # clone this repo to your local machine
+    node v4.5.0
+    npm v2.15.9
+
+Generate a  [Bot User](https://api.slack.com/bot-users) token and [Incoming Webhook](https://api.slack.com/incoming-webhooks) url. Edit the following in the ```index.js``` file
+```javascript
+var slack = new slackAPI({
+    'token': '<bot-user-token-goes-here>',
+    'logging': true,
+    'autoReconnect': true
+});
+
+var url = process.env.SLACK_WEBHOOK_URL || "<incoming-webhook-url-goes-here>";
+```
+
+If you've got the above installed running it is as easy as:
+
     $ git clone https://github.com/moringaschool/help-slack-bot.git
-
-    # enter the folder and install dependancies
     $ cd slackbot-express
     $ npm install
-
-    # start the project
     $ npm start
-
 
 also info about the environment you're building it in (node version, etc)
