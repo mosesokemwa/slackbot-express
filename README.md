@@ -47,5 +47,3 @@ If you've got the above installed running it is as easy as:
     $ cd slackbot-express
     $ npm install
     $ npm start
-
-also info about the environment you're building it in (node version, etc)
