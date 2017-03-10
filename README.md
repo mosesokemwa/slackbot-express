@@ -43,7 +43,7 @@ var url = process.env.SLACK_WEBHOOK_URL || "<incoming-webhook-url-goes-here>";
 
 If you've got the above installed running it is as easy as:
 
-    $ git clone https://github.com/moringaschool/help-slack-bot.git
+    $ git clone https://github.com/mussaimo/slackbot-express.git
     $ cd slackbot-express
     $ npm install
     $ npm start
